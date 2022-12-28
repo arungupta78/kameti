@@ -1,3 +1,22 @@
-  server:
-    port: 8080
-    servlet.context-path: /kameti
+server:
+  port: 8080
+  servlet.context-path: /kameti
+
+spring.jpa.hibernate.ddl-auto: update
+
+---
+spring:
+  config:
+    activate:
+      on-profile: local
+
+jasypt:
+  encryptor:
+    algorithm: PBEWithMD5AndDES
+    iv-generator-classname: org.jasypt.iv.NoIvGenerator
+
+spring.datasource:
+  url: jdbc:mysql://localhost:3306/kameti
+  username: root
+  password: ENC(XmhzU/A9x8TIvd+b5980Sy+bLWSJf+iK)
+  driver-class-name: com.mysql.cj.jdbc.Driver
