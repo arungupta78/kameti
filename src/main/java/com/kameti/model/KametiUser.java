@@ -5,6 +5,7 @@ import static java.util.Collections.singletonList;
 
 import jakarta.persistence.*;
 import java.util.Collection;
+import java.util.Date;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -23,8 +24,12 @@ public class KametiUser implements UserDetails {
 
   String firstname;
   String lastname;
+
+  @Column(unique = true)
   String email;
+
   String password;
+  Date creationDate;
 
   @Enumerated(EnumType.STRING)
   Role role;

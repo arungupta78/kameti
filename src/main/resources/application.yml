@@ -3,9 +3,9 @@ server:
   servlet.context-path: /kameti
 
 spring.jpa:
-  hibernate.ddl-auto: create-drop
-  show-sql: true
-  properties.hibernate.format_sql: true
+  hibernate.ddl-auto: update
+  properties.hibernate:
+    jdbc.time_zone: UTC
 
 ---
 spring:
@@ -23,3 +23,7 @@ spring.datasource:
   username: root
   password: ENC(XmhzU/A9x8TIvd+b5980Sy+bLWSJf+iK)
   driver-class-name: com.mysql.cj.jdbc.Driver
+
+spring.jpa:
+  hibernate.ddl-auto: create-drop
+  show-sql: true

@@ -3,14 +3,15 @@ package com.kameti.service;
 import com.kameti.model.*;
 import com.kameti.repository.KametiUserRepository;
 import com.kameti.security.JwtService;
+import java.time.Instant;
+import java.util.Date;
+import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -28,9 +29,10 @@ public class AuthenticationService {
             .lastname(requestBody.getLastname())
             .email(requestBody.getEmail())
             .password(passwordEncoder.encode(requestBody.getPassword()))
+            .creationDate(Date.from(Instant.now()))
             .role(Role.USER)
             .build();
-    return Optional.of(repository.save(user))
+    return Optional.of(repository.registerNewUserAccount(user))
         .map(jwtService::generateToken)
         .map(AuthenticationResponse::new)
         .orElseThrow();
