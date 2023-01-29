@@ -3,9 +3,12 @@ package com.kameti.service;
 import com.kameti.model.*;
 import com.kameti.repository.KametiUserRepository;
 import com.kameti.security.JwtService;
+import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -27,16 +30,19 @@ public class AuthenticationService {
             .password(passwordEncoder.encode(requestBody.getPassword()))
             .role(Role.USER)
             .build();
-    repository.save(user);
-    return AuthenticationResponse.builder().token(jwtService.generateToken(user)).build();
+    return Optional.of(repository.save(user))
+        .map(jwtService::generateToken)
+        .map(AuthenticationResponse::new)
+        .orElseThrow();
   }
 
   public AuthenticationResponse authenticate(AuthenticationRequest requestBody) {
-    authenticationManager.authenticate(
-        new UsernamePasswordAuthenticationToken(requestBody.getEmail(), requestBody.getPassword()));
-
-    return repository
-        .findByEmail(requestBody.getEmail())
+    return Optional.of(
+            new UsernamePasswordAuthenticationToken(
+                requestBody.getEmail(), requestBody.getPassword()))
+        .map(authenticationManager::authenticate)
+        .map(Authentication::getPrincipal)
+        .map(UserDetails.class::cast)
         .map(jwtService::generateToken)
         .map(AuthenticationResponse::new)
         .orElseThrow();
