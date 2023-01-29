@@ -1,17 +1,18 @@
 package com.kameti.security;
 
+import com.kameti.model.KametiUser;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
+import org.springframework.stereotype.Service;
+
 import java.security.Key;
 import java.util.Collections;
 import java.util.Date;
 import java.util.Map;
 import java.util.function.Function;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.stereotype.Service;
 
 @Service
 public class JwtService {
@@ -19,7 +20,7 @@ public class JwtService {
   private static final String SECRET_KEY =
       "7638782F413F4428472B4B6250655368566D597133743677397A244326452948";
 
-  public String extractUsername(String token) {
+  public String extractUserId(String token) {
     return extractClaim(token, Claims::getSubject);
   }
 
@@ -28,23 +29,23 @@ public class JwtService {
     return claimsResolver.apply(claims);
   }
 
-  public String generateToken(UserDetails userDetails) {
+  public String generateToken(KametiUser userDetails) {
     return generateToken(Collections.emptyMap(), userDetails);
   }
 
-  private String generateToken(Map<String, Object> extraClaims, UserDetails userDetails) {
+  private String generateToken(Map<String, Object> extraClaims, KametiUser userDetails) {
     return Jwts.builder()
         .setClaims(extraClaims)
-        .setSubject(userDetails.getUsername())
+        .setSubject(userDetails.getId().toString())
         .setIssuedAt(new Date(System.currentTimeMillis()))
         .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 24))
         .signWith(getSignInKey(), SignatureAlgorithm.HS256)
         .compact();
   }
 
-  public boolean isTokenValid(String token, UserDetails userDetails) {
-    final String username = extractUsername(token);
-    return username.equals(userDetails.getUsername())
+  public boolean isTokenValid(String token, KametiUser userDetails) {
+    final String username = extractUserId(token);
+    return username.equals(userDetails.getId().toString())
         && !isTokenExpired(token)
         && userDetails.isAccountNonExpired()
         && userDetails.isAccountNonLocked()
