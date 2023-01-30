@@ -1,5 +1,6 @@
 package com.kameti.model;
 
+import com.kameti.validation.ValidPassword;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
@@ -20,6 +21,5 @@ public class RegisterRequest {
   @Email(message = "Invalid email id")
   String email;
 
-  @NotBlank(message = "Password cannot be empty")
-  String password;
+  @ValidPassword String password;
 }
