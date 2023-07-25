@@ -1,8 +1,8 @@
-package com.kameti.service;
+package com.demo.service;
 
-import com.kameti.model.*;
-import com.kameti.repository.KametiUserRepository;
-import com.kameti.security.JwtService;
+import com.demo.model.*;
+import com.demo.repository.UserRepository;
+import com.demo.security.JwtService;
 import java.time.Instant;
 import java.util.Date;
 import java.util.Optional;
@@ -17,14 +17,14 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class AuthenticationService {
 
-  private final KametiUserRepository repository;
+  private final UserRepository repository;
   private final PasswordEncoder passwordEncoder;
   private final JwtService jwtService;
   private final AuthenticationManager authenticationManager;
 
   public AuthenticationResponse register(RegisterRequest requestBody) {
     var user =
-        KametiUser.builder()
+        DemoUser.builder()
             .firstname(requestBody.getFirstname())
             .lastname(requestBody.getLastname())
             .email(requestBody.getEmail())
@@ -46,7 +46,7 @@ public class AuthenticationService {
                 new UsernamePasswordAuthenticationToken(user.getId(), requestBody.getPassword()))
         .map(authenticationManager::authenticate)
         .map(Authentication::getPrincipal)
-        .map(KametiUser.class::cast)
+        .map(DemoUser.class::cast)
         .map(jwtService::generateToken)
         .map(AuthenticationResponse::new)
         .orElseThrow();

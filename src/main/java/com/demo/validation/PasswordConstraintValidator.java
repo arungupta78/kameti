@@ -1,4 +1,4 @@
-package com.kameti.validation;
+package com.demo.validation;
 
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;

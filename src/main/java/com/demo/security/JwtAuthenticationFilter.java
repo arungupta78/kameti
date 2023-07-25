@@ -1,8 +1,8 @@
-package com.kameti.security;
+package com.demo.security;
 
 import static org.springframework.http.HttpHeaders.AUTHORIZATION;
 
-import com.kameti.model.KametiUser;
+import com.demo.model.DemoUser;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -39,7 +39,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     userId = jwtService.extractUserId(jwt);
 
     if (userId != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-      KametiUser userDetails = (KametiUser) this.userDetailsService.loadUserByUsername(userId);
+      DemoUser userDetails = (DemoUser) this.userDetailsService.loadUserByUsername(userId);
       if (jwtService.isTokenValid(jwt, userDetails)) {
         UsernamePasswordAuthenticationToken authToken =
             new UsernamePasswordAuthenticationToken(

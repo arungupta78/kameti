@@ -1,6 +1,6 @@
-package com.kameti.security;
+package com.demo.security;
 
-import com.kameti.model.KametiUser;
+import com.demo.model.DemoUser;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -28,11 +28,11 @@ public class JwtService {
     return claimsResolver.apply(claims);
   }
 
-  public String generateToken(KametiUser userDetails) {
+  public String generateToken(DemoUser userDetails) {
     return generateToken(Collections.emptyMap(), userDetails);
   }
 
-  private String generateToken(Map<String, Object> extraClaims, KametiUser userDetails) {
+  private String generateToken(Map<String, Object> extraClaims, DemoUser userDetails) {
     return Jwts.builder()
         .setClaims(extraClaims)
         .setSubject(userDetails.getId().toString())
@@ -42,7 +42,7 @@ public class JwtService {
         .compact();
   }
 
-  public boolean isTokenValid(String token, KametiUser userDetails) {
+  public boolean isTokenValid(String token, DemoUser userDetails) {
     final String username = extractUserId(token);
     return username.equals(userDetails.getId().toString())
         && !isTokenExpired(token)
