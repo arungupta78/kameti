@@ -1,4 +1,4 @@
-package com.kameti.controller;
+package com.demo.controller;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;

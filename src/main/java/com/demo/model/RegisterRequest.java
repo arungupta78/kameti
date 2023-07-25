@@ -1,6 +1,6 @@
-package com.kameti.model;
+package com.demo.model;
 
-import com.kameti.validation.ValidPassword;
+import com.demo.validation.ValidPassword;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;

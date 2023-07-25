@@ -1,4 +1,4 @@
-package com.kameti.exception;
+package com.demo.exception;
 
 import static java.util.stream.Collectors.toMap;
 
@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 @RestControllerAdvice
-public class KametiAdvice {
+public class UserAdvice {
 
   @ExceptionHandler(MethodArgumentNotValidException.class)
   @ResponseStatus(HttpStatus.BAD_REQUEST)

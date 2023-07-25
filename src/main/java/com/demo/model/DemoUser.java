@@ -1,4 +1,4 @@
-package com.kameti.model;
+package com.demo.model;
 
 import static jakarta.persistence.GenerationType.AUTO;
 import static java.util.Collections.singletonList;
@@ -17,7 +17,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class KametiUser implements UserDetails {
+public class DemoUser implements UserDetails {
   @Id
   @GeneratedValue(strategy = AUTO)
   Long id;

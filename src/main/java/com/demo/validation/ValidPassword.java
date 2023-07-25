@@ -1,6 +1,7 @@
-package com.kameti.validation;
+package com.demo.validation;
 
-import static java.lang.annotation.ElementType.*;
+import static java.lang.annotation.ElementType.FIELD;
+import static java.lang.annotation.ElementType.PARAMETER;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 import jakarta.validation.Constraint;
@@ -10,9 +11,9 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
 @Documented
-@Constraint(validatedBy = PasswordConstraintValidator.class)
-@Target({TYPE, FIELD, ANNOTATION_TYPE})
+@Target({FIELD, PARAMETER})
 @Retention(RUNTIME)
+@Constraint(validatedBy = PasswordConstraintValidator.class)
 public @interface ValidPassword {
 
   String message() default "Invalid Password";

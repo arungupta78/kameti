@@ -1,6 +1,6 @@
-package com.kameti.configuration;
+package com.demo.configuration;
 
-import com.kameti.security.JwtAuthenticationFilter;
+import com.demo.security.JwtAuthenticationFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

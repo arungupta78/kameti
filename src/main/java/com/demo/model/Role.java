@@ -1,4 +1,4 @@
-package com.kameti.model;
+package com.demo.model;
 
 public enum Role {
   USER,

@@ -1,4 +1,4 @@
-package com.kameti;
+package com.demo;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -7,6 +7,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class KametiApplication {
 
   public static void main(String[] args) {
-    SpringApplication.run(KametiApplication.class, args);
+    var apc = SpringApplication.run(KametiApplication.class, args);
+    for (String beanDefinitionName : apc.getBeanDefinitionNames()) {
+      System.out.println(beanDefinitionName);
+    }
   }
 }
