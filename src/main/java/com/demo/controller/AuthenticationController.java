@@ -11,7 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/auth")
+@RequestMapping("/users")
 @RequiredArgsConstructor
 public class AuthenticationController {
   private final AuthenticationService service;
@@ -22,7 +22,7 @@ public class AuthenticationController {
     return ResponseEntity.ok(service.register(requestBody));
   }
 
-  @PostMapping("/authenticate")
+  @PostMapping("/login")
   public ResponseEntity<AuthenticationResponse> authenticate(
       @RequestBody AuthenticationRequest requestBody) {
     return ResponseEntity.ok(service.authenticate(requestBody));
