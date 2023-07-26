@@ -12,6 +12,14 @@ spring:
   config:
     activate:
       on-profile: local
+application:
+  security:
+    jwt:
+      secret-key: 7638782F413F4428472B4B6250655368566D597133743677397A244326452948
+      expiration: 20000 # one second
+      refresh-token:
+        expiration: 604800000 # seven days
+
 
 jasypt:
   encryptor:
