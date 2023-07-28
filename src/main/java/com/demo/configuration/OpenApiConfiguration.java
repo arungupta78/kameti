@@ -6,6 +6,7 @@ import io.swagger.v3.oas.annotations.enums.SecuritySchemeType;
 import io.swagger.v3.oas.annotations.info.Contact;
 import io.swagger.v3.oas.annotations.info.Info;
 import io.swagger.v3.oas.annotations.info.License;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.security.SecurityScheme;
 import io.swagger.v3.oas.annotations.servers.Server;
 
@@ -22,7 +23,8 @@ import io.swagger.v3.oas.annotations.servers.Server;
     servers = {
       @Server(description = "Local ENV", url = "http://localhost:8080/kameti"),
       @Server(description = "Prod ENV", url = "http://kameti-prod.com")
-    })
+    },
+    security = @SecurityRequirement(name = "bearerAuth"))
 @SecurityScheme(
     name = "bearerAuth",
     description = "JWT Auth Description",
