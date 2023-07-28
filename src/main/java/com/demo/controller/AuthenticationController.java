@@ -4,6 +4,7 @@ import com.demo.model.AuthenticationRequest;
 import com.demo.model.AuthenticationResponse;
 import com.demo.model.RegisterRequest;
 import com.demo.service.AuthenticationService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/users")
 @RequiredArgsConstructor
+@SecurityRequirement(name = "bearerAuth")
 public class AuthenticationController {
   private final AuthenticationService service;
 
