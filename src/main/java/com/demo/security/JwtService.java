@@ -29,10 +29,10 @@ public class JwtService {
     return claimsResolver.apply(claims);
   }
 
-  public Token generateAccessAndRefreshToken(DemoUser userDetails) {
+  public TokenRecord generateAccessAndRefreshToken(DemoUser userDetails) {
     String accessToken = generateAccessToken(userDetails);
     String refreshToken = generateRefreshToken(userDetails);
-    return new Token(accessToken, refreshToken);
+    return new TokenRecord(accessToken, refreshToken);
   }
 
   public String generateAccessToken(DemoUser userDetails) {
@@ -86,5 +86,5 @@ public class JwtService {
     return Keys.hmacShaKeyFor(keyBytes);
   }
 
-  public record Token(String accessToken, String refreshToken) {}
+  public record TokenRecord(String accessToken, String refreshToken) {}
 }
