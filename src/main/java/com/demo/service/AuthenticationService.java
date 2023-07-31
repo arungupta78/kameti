@@ -2,6 +2,7 @@ package com.demo.service;
 
 import static org.springframework.http.HttpHeaders.AUTHORIZATION;
 
+import com.demo.annotation.LogSignIn;
 import com.demo.model.*;
 import com.demo.repository.TokenRepository;
 import com.demo.repository.UserRepository;
@@ -43,6 +44,7 @@ public class AuthenticationService {
         .orElseThrow();
   }
 
+  @LogSignIn
   public AuthenticationResponse authenticate(AuthenticationRequest requestBody) {
     Optional<DemoUser> userOptional = repository.findByEmail(requestBody.getEmail());
     return userOptional
