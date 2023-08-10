@@ -1,24 +1,25 @@
-package com.demo.model;
+package com.demo.entity;
 
 import static jakarta.persistence.GenerationType.AUTO;
 import static java.util.Collections.singletonList;
 
-import com.demo.token.Token;
+import com.demo.model.Role;
 import jakarta.persistence.*;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import java.util.Objects;
+import lombok.*;
+import org.hibernate.Hibernate;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-@Data
+@Getter
+@Setter
+@ToString
+@RequiredArgsConstructor
 @Builder
-@NoArgsConstructor
 @AllArgsConstructor
 @Entity(name = "User")
 public class DemoUser implements UserDetails {
@@ -39,6 +40,7 @@ public class DemoUser implements UserDetails {
   Role role;
 
   @OneToMany(mappedBy = "user")
+  @ToString.Exclude
   private List<Token> tokens;
 
   @Override
@@ -69,5 +71,18 @@ public class DemoUser implements UserDetails {
   @Override
   public boolean isEnabled() {
     return true;
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+    DemoUser demoUser = (DemoUser) o;
+    return id != null && Objects.equals(id, demoUser.id);
+  }
+
+  @Override
+  public int hashCode() {
+    return getClass().hashCode();
   }
 }

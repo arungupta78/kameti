@@ -1,7 +1,7 @@
 package com.demo.security;
 
 import com.demo.configuration.JWTConfiguration;
-import com.demo.model.DemoUser;
+import com.demo.entity.DemoUser;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;

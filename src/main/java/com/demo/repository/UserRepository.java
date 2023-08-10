@@ -1,7 +1,7 @@
 package com.demo.repository;
 
+import com.demo.entity.DemoUser;
 import com.demo.exception.UserAlreadyExistsException;
-import com.demo.model.DemoUser;
 import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 

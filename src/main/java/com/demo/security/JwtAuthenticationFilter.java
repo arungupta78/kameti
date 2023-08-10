@@ -2,7 +2,7 @@ package com.demo.security;
 
 import static org.springframework.http.HttpHeaders.AUTHORIZATION;
 
-import com.demo.model.DemoUser;
+import com.demo.entity.DemoUser;
 import com.demo.repository.TokenRepository;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;

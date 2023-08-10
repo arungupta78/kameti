@@ -3,13 +3,14 @@ package com.demo.service;
 import static org.springframework.http.HttpHeaders.AUTHORIZATION;
 
 import com.demo.annotation.LogSignIn;
+import com.demo.entity.DemoUser;
+import com.demo.entity.Token;
 import com.demo.model.*;
+import com.demo.model.TokenType;
 import com.demo.repository.TokenRepository;
 import com.demo.repository.UserRepository;
 import com.demo.security.JwtService;
 import com.demo.security.JwtService.TokenRecord;
-import com.demo.token.Token;
-import com.demo.token.TokenType;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
